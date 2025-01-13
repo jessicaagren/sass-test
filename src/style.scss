@@ -1,3 +1,9 @@
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @mixin circle($diameter, $color) {
   width: $diameter;
   height: $diameter;
@@ -17,14 +23,14 @@
   background-color: $color;
 }
 
-#ett {
+#one {
   @include circle(75px, green);
 }
 
-#tva {
+#two {
   @include rectangle(50px, 100px, blue);
 }
 
-#tre {
+#three {
   @include square(50px, red)
 }
