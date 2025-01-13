@@ -1,8 +1,16 @@
-div {
+// ⭐ Skapa några flexbox mixins. Det är ofta vi gör ungefär samma sak med flexbox och det kan vara bra att bryta ut det till egna mixins. Lägg ut några wrappers med barn och lägg dina mixins på dessa wrappers för att testa dina mixins.
+
+@mixin flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+#flextest {
+  @include flex();
+}
+
+// ⭐ Vi vill skriva mixins för att göra cirklar, kvadrater och rektanglar. Lägg ut lite div-taggar och testa dina mixins. En cirkel har alltid en diameter och en färg. En kvadrat har alltid en sidlängd och en färg. En rektangel har två sidlängder och en färg.
 
 @mixin circle($diameter, $color) {
   width: $diameter;
@@ -25,12 +33,44 @@ div {
 
 #one {
   @include circle(75px, green);
+  @include flex();
 }
 
 #two {
   @include rectangle(50px, 100px, blue);
+  @include flex();
 }
 
 #three {
-  @include square(50px, red)
+  @include square(50px, red);
+  @include flex();
 }
+
+// ⭐ Vi vill skriva en mixin för att sätta en bild som bakgrund på en tagg, exvis en div. Bilden ska vara centrerad och täcka hela taggen. Bilden ska inte upprepa sig utan bara synas en gång. Prova några stycken divs med olika storlekar som alla inkluderar din mixin. Prova med olika bilder i varje div.
+
+@mixin backgroundimage($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+#imagetest1 {
+  @include backgroundimage("https://i.pinimg.com/originals/2e/cf/06/2ecf067a2069128f44d75d25a32e219e.jpg");
+  height: 200px;
+  width: 200px;
+}
+
+#imagetest2 {
+  @include backgroundimage("https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp");
+  height: 200px;
+  width: 450px;
+}
+
+#imagetest3 {
+  @include backgroundimage("https://c02.purpledshub.com/uploads/sites/40/2023/08/JI230816Cosmos220-6d9254f-edited-scaled.jpg?w=1029&webp=1");
+  height: 150px;
+  width: 50%;
+}
+
+// Skriv några media query mixins och använd dig av @content.
