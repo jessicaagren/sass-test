@@ -1,13 +1,18 @@
 // ⭐ Skapa några flexbox mixins. Det är ofta vi gör ungefär samma sak med flexbox och det kan vara bra att bryta ut det till egna mixins. Lägg ut några wrappers med barn och lägg dina mixins på dessa wrappers för att testa dina mixins.
 
-@mixin flex {
+@mixin flexcenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+@mixin flexcolumn {
+display: flex;
+flex-direction: column;
+}
+
 #flextest {
-  @include flex();
+  @include flexcolumn();
 }
 
 // ⭐ Vi vill skriva mixins för att göra cirklar, kvadrater och rektanglar. Lägg ut lite div-taggar och testa dina mixins. En cirkel har alltid en diameter och en färg. En kvadrat har alltid en sidlängd och en färg. En rektangel har två sidlängder och en färg.
@@ -33,17 +38,17 @@
 
 #one {
   @include circle(75px, green);
-  @include flex();
+  @include flexcenter();
 }
 
 #two {
   @include rectangle(50px, 100px, blue);
-  @include flex();
+  @include flexcenter();
 }
 
 #three {
   @include square(50px, red);
-  @include flex();
+  @include flexcenter();
 }
 
 // ⭐ Vi vill skriva en mixin för att sätta en bild som bakgrund på en tagg, exvis en div. Bilden ska vara centrerad och täcka hela taggen. Bilden ska inte upprepa sig utan bara synas en gång. Prova några stycken divs med olika storlekar som alla inkluderar din mixin. Prova med olika bilder i varje div.
@@ -57,13 +62,13 @@
 
 #imagetest1 {
   @include backgroundimage("https://i.pinimg.com/originals/2e/cf/06/2ecf067a2069128f44d75d25a32e219e.jpg");
-  height: 200px;
+  height: 250px;
   width: 200px;
 }
 
 #imagetest2 {
   @include backgroundimage("https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp");
-  height: 200px;
+  height: 300px;
   width: 450px;
 }
 
@@ -74,3 +79,36 @@
 }
 
 // Skriv några media query mixins och använd dig av @content.
+
+@mixin for-phone-only {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+
+body {
+  background-color: darkred;
+  @include for-desktop-up() {
+    background-color: lightsalmon;
+  }
+}
