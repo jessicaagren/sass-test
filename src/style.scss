@@ -1,0 +1,30 @@
+@mixin circle($diameter, $color) {
+  width: $diameter;
+  height: $diameter;
+  border-radius: 50%;
+  background-color: $color;
+}
+
+@mixin square($sidelength, $color) {
+  height: $sidelength;
+  width: $sidelength;
+  background-color: $color;
+}
+
+@mixin rectangle($height, $width, $color) {
+  height: $height;
+  width: $width;
+  background-color: $color;
+}
+
+#ett {
+  @include circle(75px, green);
+}
+
+#tva {
+  @include rectangle(50px, 100px, blue);
+}
+
+#tre {
+  @include square(50px, red)
+}
