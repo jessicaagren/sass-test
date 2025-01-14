@@ -107,8 +107,9 @@ flex-direction: column;
 }
 
 body {
-  background-color: darkred;
+  color: white;
+  background-color: lightsalmon;
   @include for-desktop-up() {
-    background-color: lightsalmon;
+    background-color: darkred;
   }
 }
