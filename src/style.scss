@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 // ⭐ Skapa några flexbox mixins. Det är ofta vi gör ungefär samma sak med flexbox och det kan vara bra att bryta ut det till egna mixins. Lägg ut några wrappers med barn och lägg dina mixins på dessa wrappers för att testa dina mixins.
 
 @mixin flexcenter {
@@ -6,13 +10,12 @@
   align-items: center;
 }
 
-@mixin flexcolumn {
-display: flex;
-flex-direction: column;
+@mixin margin {
+  margin: 10px;
 }
 
 #flextest {
-  @include flexcolumn();
+  @include flexcenter();
 }
 
 // ⭐ Vi vill skriva mixins för att göra cirklar, kvadrater och rektanglar. Lägg ut lite div-taggar och testa dina mixins. En cirkel har alltid en diameter och en färg. En kvadrat har alltid en sidlängd och en färg. En rektangel har två sidlängder och en färg.
@@ -37,17 +40,17 @@ flex-direction: column;
 }
 
 #one {
-  @include circle(75px, green);
+  @include circle(75px, darkgreen);
   @include flexcenter();
 }
 
 #two {
-  @include rectangle(50px, 100px, blue);
+  @include rectangle(50px, 100px, darkblue);
   @include flexcenter();
 }
 
 #three {
-  @include square(50px, red);
+  @include square(50px, darkred);
   @include flexcenter();
 }
 
@@ -60,10 +63,14 @@ flex-direction: column;
   background-size: cover;
 }
 
+* {
+  @include margin();
+}
+
 #imagetest1 {
   @include backgroundimage("https://i.pinimg.com/originals/2e/cf/06/2ecf067a2069128f44d75d25a32e219e.jpg");
   height: 250px;
-  width: 200px;
+  width: 400px;
 }
 
 #imagetest2 {
@@ -110,6 +117,36 @@ body {
   color: white;
   background-color: lightsalmon;
   @include for-desktop-up() {
-    background-color: darkred;
+    background-color: brown;
   }
+}
+
+// Bygg en mixin som skapar bakgrundsgradienter baserat på två färger och en riktning (t.ex. "to right" eller "to bottom").
+
+@mixin gradient ($direction, $color1, $color2) {
+  background-image: linear-gradient($direction, $color1, $color2);
+}
+
+#gradient {
+  @include gradient(to left, red, pink);
+  height: 200px;
+  width: 200px;
+}
+
+// Skapa en mixin för att hantera kantlinjer med parametrar för bredd, stil och färg. Gör mixinen flexibel genom att låta parametrarna vara valfria och ha standardvärden.
+
+@mixin thinborder ($style, $color) {
+  border: 1px $style $color;
+}
+
+@mixin thickborder ($style, $color) {
+  border: 5px $style $color;
+}
+
+#gradient {
+  @include thickborder(ridge, red);
+}
+
+#imagetest3 {
+  @include thinborder(dashed, white);
 }
